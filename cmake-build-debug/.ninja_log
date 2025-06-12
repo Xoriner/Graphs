@@ -1,0 +1,6 @@
+# ninja log v6
+2	130	7714636601346484	CMakeFiles/Projekt2AZO.dir/main.cpp.obj	2569ec02c0cb7903
+12	152	7714636601457460	CMakeFiles/Projekt2AZO.dir/utils/graph.cpp.obj	944711a501605a0
+21	216	7714636601537966	CMakeFiles/Projekt2AZO.dir/MST/kruskal.cpp.obj	bdafa4eed0fb5d7
+17	218	7714636601497944	CMakeFiles/Projekt2AZO.dir/MST/prim.cpp.obj	d5dad12241c1a72a
+219	349	7714636603511543	Projekt2AZO.exe	3aed63facee5eda8

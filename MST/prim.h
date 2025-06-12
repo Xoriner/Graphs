@@ -1,12 +1,8 @@
 #ifndef PRIM_H
 #define PRIM_H
 
+#include "../utils/graph.h"
 
+void primMatrix(Graph* g);
 
-class prim {
-
-};
-
-
-
-#endif //PRIM_H
+#endif // PRIM_H

@@ -1,10 +1,8 @@
 #ifndef KRUSKAL_H
 #define KRUSKAL_H
 
-// MST from neighbours matrix
-void kruskal_matrix();
+#include "../utils/graph.h"
 
-// MST from neighbours list
-void kruskal_list();
+void kruskal(Graph* g);
 
-#endif //KRUSKAL_H
+#endif // KRUSKAL_H
