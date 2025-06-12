@@ -77,6 +77,20 @@ build CMakeFiles/Projekt2AZO.dir/MST/kruskal.cpp.obj: CXX_COMPILER__Projekt2AZO_
   OBJECT_DIR = CMakeFiles\Projekt2AZO.dir
   OBJECT_FILE_DIR = CMakeFiles\Projekt2AZO.dir\MST
 
+build CMakeFiles/Projekt2AZO.dir/Path/dijkstra.cpp.obj: CXX_COMPILER__Projekt2AZO_unscanned_Debug C$:/Users/terra/OneDrive$ -$ Politechnika$ Wroclawska/studia/4$ semestr/AIZO/projekt/projekt2/Projekt_2_AZO/Path/dijkstra.cpp || cmake_object_order_depends_target_Projekt2AZO
+  DEP_FILE = CMakeFiles\Projekt2AZO.dir\Path\dijkstra.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -I"C:/Users/terra/OneDrive - Politechnika Wroclawska/studia/4 semestr/AIZO/projekt/projekt2/Projekt_2_AZO/utils" -I"C:/Users/terra/OneDrive - Politechnika Wroclawska/studia/4 semestr/AIZO/projekt/projekt2/Projekt_2_AZO/MST"
+  OBJECT_DIR = CMakeFiles\Projekt2AZO.dir
+  OBJECT_FILE_DIR = CMakeFiles\Projekt2AZO.dir\Path
+
+build CMakeFiles/Projekt2AZO.dir/Path/bellmanford.cpp.obj: CXX_COMPILER__Projekt2AZO_unscanned_Debug C$:/Users/terra/OneDrive$ -$ Politechnika$ Wroclawska/studia/4$ semestr/AIZO/projekt/projekt2/Projekt_2_AZO/Path/bellmanford.cpp || cmake_object_order_depends_target_Projekt2AZO
+  DEP_FILE = CMakeFiles\Projekt2AZO.dir\Path\bellmanford.cpp.obj.d
+  FLAGS = -g -std=gnu++17 -fdiagnostics-color=always
+  INCLUDES = -I"C:/Users/terra/OneDrive - Politechnika Wroclawska/studia/4 semestr/AIZO/projekt/projekt2/Projekt_2_AZO/utils" -I"C:/Users/terra/OneDrive - Politechnika Wroclawska/studia/4 semestr/AIZO/projekt/projekt2/Projekt_2_AZO/MST"
+  OBJECT_DIR = CMakeFiles\Projekt2AZO.dir
+  OBJECT_FILE_DIR = CMakeFiles\Projekt2AZO.dir\Path
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target Projekt2AZO
@@ -85,7 +99,7 @@ build CMakeFiles/Projekt2AZO.dir/MST/kruskal.cpp.obj: CXX_COMPILER__Projekt2AZO_
 #############################################
 # Link the executable Projekt2AZO.exe
 
-build Projekt2AZO.exe: CXX_EXECUTABLE_LINKER__Projekt2AZO_Debug CMakeFiles/Projekt2AZO.dir/main.cpp.obj CMakeFiles/Projekt2AZO.dir/utils/graph.cpp.obj CMakeFiles/Projekt2AZO.dir/MST/prim.cpp.obj CMakeFiles/Projekt2AZO.dir/MST/kruskal.cpp.obj
+build Projekt2AZO.exe: CXX_EXECUTABLE_LINKER__Projekt2AZO_Debug CMakeFiles/Projekt2AZO.dir/main.cpp.obj CMakeFiles/Projekt2AZO.dir/utils/graph.cpp.obj CMakeFiles/Projekt2AZO.dir/MST/prim.cpp.obj CMakeFiles/Projekt2AZO.dir/MST/kruskal.cpp.obj CMakeFiles/Projekt2AZO.dir/Path/dijkstra.cpp.obj CMakeFiles/Projekt2AZO.dir/Path/bellmanford.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\Projekt2AZO.dir

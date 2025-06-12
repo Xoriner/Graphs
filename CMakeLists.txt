@@ -13,4 +13,8 @@ add_executable(Projekt2AZO
         utils/graph.cpp
         MST/prim.cpp
         MST/kruskal.cpp
+        Path/dijkstra.cpp
+        Path/dijkstra.h
+        Path/bellmanford.cpp
+        Path/bellmanford.h
 )
