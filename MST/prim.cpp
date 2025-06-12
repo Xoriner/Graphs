@@ -17,12 +17,10 @@ void primMatrix(Graph* g) {
     auto start = std::chrono::high_resolution_clock::now();
     int V = g->vertices;
 
-    // Alokacja pamięci
     int* parent = (int*)malloc(V * sizeof(int));
     int* key = (int*)malloc(V * sizeof(int));
     bool* mstSet = (bool*)malloc(V * sizeof(bool));
 
-    // Inicjalizacja
     for (int i = 0; i < V; i++) {
         key[i] = INT_MAX;
         mstSet[i] = false;
@@ -31,7 +29,6 @@ void primMatrix(Graph* g) {
     key[0] = 0;
     parent[0] = -1;
 
-    // Główna pętla algorytmu
     for (int count = 0; count < V - 1; count++) {
         int u = minKey(key, mstSet, V);
         mstSet[u] = true;
@@ -46,18 +43,18 @@ void primMatrix(Graph* g) {
 
     auto end = std::chrono::high_resolution_clock::now();
 
-    // Wyświetlanie wyników
     int total = 0;
     printf("Prim (Matrix) MST edges:\n");
     for (int i = 1; i < V; i++) {
-        printf("%d - %d (%d)\n", parent[i], i, g->matrix[i][parent[i]]);
-        total += g->matrix[i][parent[i]];
+        if (parent[i] != -1) {
+            printf("%d - %d (%d)\n", parent[i], i, g->matrix[i][parent[i]]);
+            total += g->matrix[i][parent[i]];
+        }
     }
     printf("Total weight: %d\n", total);
     printf("Total time: %lld ms\n",
            std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count());
 
-    // Zwolnienie pamięci
     free(parent);
     free(key);
     free(mstSet);
@@ -95,21 +92,17 @@ void heapify(MinHeap* heap, int idx) {
     }
 
     if (smallest != idx) {
-        // Zamiana węzłów
         HeapNode temp = heap->nodes[idx];
         heap->nodes[idx] = heap->nodes[smallest];
         heap->nodes[smallest] = temp;
 
-        // Aktualizacja pozycji
         heap->pos[heap->nodes[idx].vertex] = idx;
         heap->pos[heap->nodes[smallest].vertex] = smallest;
 
-        // Rekurencyjne heapify
         heapify(heap, smallest);
     }
 }
 
-// Zmodyfikowana funkcja extractMin
 HeapNode extractMin(MinHeap* heap) {
     HeapNode root = heap->nodes[0];
     heap->nodes[0] = heap->nodes[--heap->size];
@@ -118,20 +111,18 @@ HeapNode extractMin(MinHeap* heap) {
     return root;
 }
 
-// Zmodyfikowana funkcja decreaseKey
 void decreaseKey(MinHeap* heap, int vertex, int key) {
     int i = heap->pos[vertex];
     if (key > heap->nodes[i].key) return;
 
     heap->nodes[i].key = key;
-    while (i > 0 && heap->nodes[i].key < heap->nodes[(i-1)/2].key) {
-        // Swap with parent
-        heap->pos[heap->nodes[i].vertex] = (i-1)/2;
-        heap->pos[heap->nodes[(i-1)/2].vertex] = i;
+    while (i > 0 && heap->nodes[i].key < heap->nodes[(i - 1) / 2].key) {
+        heap->pos[heap->nodes[i].vertex] = (i - 1) / 2;
+        heap->pos[heap->nodes[(i - 1) / 2].vertex] = i;
         HeapNode temp = heap->nodes[i];
-        heap->nodes[i] = heap->nodes[(i-1)/2];
-        heap->nodes[(i-1)/2] = temp;
-        i = (i-1)/2;
+        heap->nodes[i] = heap->nodes[(i - 1) / 2];
+        heap->nodes[(i - 1) / 2] = temp;
+        i = (i - 1) / 2;
     }
 }
 
@@ -143,40 +134,40 @@ void primList(Graph* g) {
     auto start = std::chrono::high_resolution_clock::now();
     int V = g->vertices;
 
-    // Alokacja pamięci
     int* parent = (int*)malloc(V * sizeof(int));
     int* key = (int*)malloc(V * sizeof(int));
+    bool* inHeap = (bool*)malloc(V * sizeof(bool));
     MinHeap* heap = createMinHeap(V);
 
-    // Inicjalizacja
     for (int v = 0; v < V; v++) {
         parent[v] = -1;
         key[v] = INT_MAX;
+        inHeap[v] = true;
+    }
+
+    key[0] = 0;
+
+    for (int v = 0; v < V; v++) {
         heap->nodes[v].vertex = v;
         heap->nodes[v].key = key[v];
         heap->pos[v] = v;
     }
     heap->size = V;
 
-    // Ustawienie klucza dla pierwszego wierzchołka
-    key[0] = 0;
-    decreaseKey(heap, 0, key[0]);
-
-    // Główna pętla algorytmu
     while (heap->size > 0) {
         HeapNode minNode = extractMin(heap);
         int u = minNode.vertex;
+        inHeap[u] = false;
 
-        // Przejście przez wszystkich sąsiadów u
         AdjNode* curr = g->adjList[u];
         while (curr != NULL) {
             int v = curr->vertex;
             int weight = curr->weight;
 
-            if (isInHeap(heap, v) && weight < key[v]) {
+            if (inHeap[v] && weight < key[v]) {
                 key[v] = weight;
                 parent[v] = u;
-                decreaseKey(heap, v, key[v]);
+                decreaseKey(heap, v, weight);
             }
             curr = curr->next;
         }
@@ -184,19 +175,20 @@ void primList(Graph* g) {
 
     auto end = std::chrono::high_resolution_clock::now();
 
-    // Wyświetlanie wyników
     int total = 0;
     printf("Prim (List) MST edges:\n");
     for (int i = 1; i < V; i++) {
-        printf("%d - %d (%d)\n", parent[i], i, key[i]);
-        total += key[i];
+        if (parent[i] != -1) {
+            printf("%d - %d (%d)\n", parent[i], i, key[i]);
+            total += key[i];
+        }
     }
     printf("Total weight: %d\n", total);
     printf("Total time: %lld ms\n",
            std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count());
 
-    // Zwolnienie pamięci
     free(parent);
     free(key);
+    free(inHeap);
     freeMinHeap(heap);
 }

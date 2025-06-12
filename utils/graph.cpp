@@ -16,7 +16,9 @@ Graph* createGraph(int V, int E, bool isDirected) {
     }
 
     g->adjList = (AdjNode**)malloc(V * sizeof(AdjNode*));
-    for (int i = 0; i < V; i++) g->adjList[i] = NULL;
+    for (int i = 0; i < V; i++) {
+        g->adjList[i] = NULL;
+    }
 
     return g;
 }
@@ -40,20 +42,26 @@ void freeGraph(Graph* g) {
 Graph* loadGraphFromFile(const char* filename, bool isDirected) {
     FILE* file = fopen(filename, "r");
     if (!file) return NULL;
+
     int E, V;
     fscanf(file, "%d %d", &E, &V);
+
     Graph* g = createGraph(V, E, isDirected);
+
     for (int i = 0; i < E; i++) {
         int u, v, w;
         fscanf(file, "%d %d %d", &u, &v, &w);
+
         g->matrix[u][v] = w;
         g->edgeList[i].start = u;
         g->edgeList[i].end = v;
         g->edgeList[i].weight = w;
+
         if (!isDirected) {
             g->matrix[v][u] = w;
         }
     }
+
     fclose(file);
     buildAdjList(g);
     return g;
@@ -106,48 +114,112 @@ void printAdjList(Graph* g) {
 
 Graph* generateRandomGraph(int V, float density) {
     int maxEdges = V * (V - 1) / 2;
-    int E = (int)(density * maxEdges);
+    int targetEdges = (int)(density * maxEdges);
 
-    Graph* g = createGraph(V, E, false);
+    Graph* g = createGraph(V, targetEdges + V - 1, false); // allocate extra space for MST part
     int edgeIndex = 0;
+
     int** added = (int**)malloc(V * sizeof(int*));
     for (int i = 0; i < V; i++) {
         added[i] = (int*)calloc(V, sizeof(int));
     }
 
-    srand(time(NULL));
+    srand((unsigned int)time(NULL));
 
-    // Najpierw generujemy spójne drzewo rozpinające
+    // Generate a connected spanning tree
     for (int i = 1; i < V; i++) {
-        int u = i;
         int v = rand() % i;
+        int u = i;
         int w = rand() % 100 + 1;
-        g->matrix[u][v] = w;
-        g->matrix[v][u] = w;
+
+        g->matrix[u][v] = g->matrix[v][u] = w;
+
         g->edgeList[edgeIndex].start = u;
         g->edgeList[edgeIndex].end = v;
         g->edgeList[edgeIndex].weight = w;
+
         added[u][v] = added[v][u] = 1;
         edgeIndex++;
     }
 
-    // Dodajemy losowe krawędzie do osiągnięcia zadanej gęstości
-    while (edgeIndex < E) {
+    // Add additional edges to reach desired density
+    while (edgeIndex < targetEdges) {
         int u = rand() % V;
         int v = rand() % V;
         if (u != v && !added[u][v]) {
             int w = rand() % 100 + 1;
-            g->matrix[u][v] = w;
-            g->matrix[v][u] = w;
+
+            g->matrix[u][v] = g->matrix[v][u] = w;
+
             g->edgeList[edgeIndex].start = u;
             g->edgeList[edgeIndex].end = v;
             g->edgeList[edgeIndex].weight = w;
+
             added[u][v] = added[v][u] = 1;
             edgeIndex++;
         }
     }
 
-    for (int i = 0; i < V; i++) free(added[i]);
+    g->edges = edgeIndex;
+
+    for (int i = 0; i < V; i++) {
+        free(added[i]);
+    }
+    free(added);
+
+    buildAdjList(g);
+    return g;
+}
+
+Graph* generateRandomDirectedGraph(int V, float density) {
+    int maxEdges = V * (V - 1);
+    int targetEdges = (int)(density * maxEdges);
+
+    Graph* g = createGraph(V, targetEdges + V, true); // +V for the cycle to ensure connectivity
+    int edgeIndex = 0;
+
+    int** added = (int**)malloc(V * sizeof(int*));
+    for (int i = 0; i < V; i++) {
+        added[i] = (int*)calloc(V, sizeof(int));
+    }
+
+    srand((unsigned int)time(NULL));
+
+    // Create a cycle through all vertices to ensure connectivity
+    for (int i = 0; i < V; i++) {
+        int u = i;
+        int v = (i + 1) % V;
+        int w = rand() % 100 + 1;
+
+        g->matrix[u][v] = w;
+        g->edgeList[edgeIndex].start = u;
+        g->edgeList[edgeIndex].end = v;
+        g->edgeList[edgeIndex].weight = w;
+        added[u][v] = 1;
+        edgeIndex++;
+    }
+
+    // Add additional edges to reach desired density
+    while (edgeIndex < targetEdges) {
+        int u = rand() % V;
+        int v = rand() % V;
+        if (u != v && !added[u][v]) {
+            int w = rand() % 100 + 1;
+
+            g->matrix[u][v] = w;
+            g->edgeList[edgeIndex].start = u;
+            g->edgeList[edgeIndex].end = v;
+            g->edgeList[edgeIndex].weight = w;
+            added[u][v] = 1;
+            edgeIndex++;
+        }
+    }
+
+    g->edges = edgeIndex;
+
+    for (int i = 0; i < V; i++) {
+        free(added[i]);
+    }
     free(added);
 
     buildAdjList(g);

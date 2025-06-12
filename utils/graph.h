@@ -28,7 +28,8 @@ typedef struct {
 Graph* createGraph(int V, int E, bool isDirected);
 void freeGraph(Graph* g);
 Graph* loadGraphFromFile(const char* filename, bool isDirected);
-Graph* generateRandomGraph(int V, float density);
+Graph* generateRandomGraph(int V, float density); // For undirected graphs
+Graph* generateRandomDirectedGraph(int V, float density); // For directed graphs
 void printMatrix(Graph* g);
 void buildAdjList(Graph* g);
 void printAdjList(Graph* g);
