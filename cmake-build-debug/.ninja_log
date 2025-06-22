@@ -1,15 +1,15 @@
 # ninja log v6
-5	217	7714748164631143	CMakeFiles/Projekt2AZO.dir/main.cpp.obj	2569ec02c0cb7903
-222	340	7714748166806637	Projekt2AZO.exe	7eacd895dbbbcf6a
-16	200	7714730229503776	CMakeFiles/Projekt2AZO.dir/utils/graph.cpp.obj	944711a501605a0
-25	289	7714730229584613	CMakeFiles/Projekt2AZO.dir/MST/kruskal.cpp.obj	bdafa4eed0fb5d7
-15	222	7714748164731938	CMakeFiles/Projekt2AZO.dir/MST/prim.cpp.obj	d5dad12241c1a72a
-29	284	7714730229635057	CMakeFiles/Projekt2AZO.dir/Path/dijkstra.cpp.obj	8997afe4b2497396
-34	281	7714730229675044	CMakeFiles/Projekt2AZO.dir/Path/bellmanford.cpp.obj	1b2f2344002762a7
-55	432	7715152998556224	CMakeFiles/Projekt2AZO.dir/utils/graph.cpp.obj	f38112d419c7346a
 44	501	7715152998440630	CMakeFiles/Projekt2AZO.dir/main.cpp.obj	5385750ff4ac8b6e
-106	541	7715152999065864	CMakeFiles/Projekt2AZO.dir/Path/bellmanford.cpp.obj	6c51a8fe6cefd4ec
-86	557	7715152998866928	CMakeFiles/Projekt2AZO.dir/Path/dijkstra.cpp.obj	970991f511a91435
+566	921	7715153003657798	Projekt2AZO.exe	b4d5cfffb0a4d723
+55	432	7715152998556224	CMakeFiles/Projekt2AZO.dir/utils/graph.cpp.obj	f38112d419c7346a
 72	565	7715152998725941	CMakeFiles/Projekt2AZO.dir/MST/kruskal.cpp.obj	5b3e511780f0cac3
 64	566	7715152998638805	CMakeFiles/Projekt2AZO.dir/MST/prim.cpp.obj	16a0d81085f20794
-566	921	7715153003657798	Projekt2AZO.exe	b4d5cfffb0a4d723
+86	557	7715152998866928	CMakeFiles/Projekt2AZO.dir/Path/dijkstra.cpp.obj	970991f511a91435
+106	541	7715152999065864	CMakeFiles/Projekt2AZO.dir/Path/bellmanford.cpp.obj	6c51a8fe6cefd4ec
+16	203	7722986823629730	CMakeFiles/Projekt2AZO.dir/utils/graph.cpp.obj	aa5666891a8e1c07
+5	285	7722986823512114	CMakeFiles/Projekt2AZO.dir/main.cpp.obj	8b3310e66aac2528
+22	315	7722986823679742	CMakeFiles/Projekt2AZO.dir/MST/prim.cpp.obj	f72594bac5118c97
+27	315	7722986823730270	CMakeFiles/Projekt2AZO.dir/MST/kruskal.cpp.obj	65bf8444a1f5a987
+37	316	7722986823841438	CMakeFiles/Projekt2AZO.dir/Path/bellmanford.cpp.obj	1206988b7221f9f6
+32	318	7722986823780682	CMakeFiles/Projekt2AZO.dir/Path/dijkstra.cpp.obj	8dbe6a2000482c65
+318	493	7722986826645135	Projekt2AZO.exe	7eacd895dbbbcf6a

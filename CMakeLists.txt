@@ -6,6 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 include_directories(
         utils
         MST
+        Path
 )
 
 add_executable(Projekt2AZO
